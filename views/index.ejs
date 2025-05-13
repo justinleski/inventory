@@ -5,8 +5,39 @@
 
   <body>
     <div style="display: flex; flex-direction: column; ">
-        <h2>Post a New Message?</h2>
-        <a href="/new" style="background-color: rgb(229, 247, 247); border-radius: 1em; padding: 12px; width: 64px;">Post</a>
+
+        <h1>Tea Inventory</h1>
+
+        <label for="country">Choose a country to filter by:</label>
+
+        <!--Wrapped in form to auto submit and filter; queires the country sort in queries.js-->
+        <form method="GET" action="/">
+            <select name="country" id="country" onchange="this.form.submit()">
+                <option value="">-- All Countries --</option>
+                <% countryOptions.forEach(country => { %>
+                <option value="<%= country.id %>" <%= country.id == selectedCountryId ? 'selected' : '' %>>
+                    <%= country.country_name %>
+                </option>
+                <% }); %>
+            </select>
+        </form>
+
+       
+
+        <a href="/new">Add new Tea</a>
+
+        <% teaList.map((tea) => { %>
+            <div style="display: flex; flex-direction: column; background-color: rgb(193, 195, 197); border-radius: 1.5em; padding: 1em; gap: 8px; margin: 16px;">
+                <h2><%=tea.tea_name%></h2>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <h3 style="color: rgb(135, 135, 137);"><%=tea.stock%></h3>
+                    <h3 style="color: rgb(135, 135, 137)"><%=tea.country%></h3>
+                    <h3 style="color: rgb(135, 135, 137);"><%=tea.type%></h3>
+                    <h3 style="color: rgb(135, 135, 137)">Decaf: <%=tea.decaf%></h3>
+                </div>
+            </div>
+        <% }) %>
+
     </div>
 
     

@@ -1,24 +1,49 @@
 // routes/
 const { Router } = require("express");
 const indexRouter = Router();
+const { getAllTea, insertTea, getCountryOptions, getTeaTypeOptions, filterByCountry } = require("../db/queries");
 
 
 
 // Our index router will take any requests from the index page and route them
-indexRouter.get("/", (req, res) => {
-  res.render("index", { title: "Tea Inventory" });
+indexRouter.get("/", async (req, res) => { // anonymous funtion, still needs to be marked async
+
+  // grab our info from db first
+  try{
+
+    selectedCountry = req.query.country;
+    let teaList;
+
+    if (selectedCountry){
+      teaList = await filterByCountry(selectedCountry);
+    } else {
+      teaList = await getAllTea();
+    }
+
+  
+    const countryOptions = await getCountryOptions();
+    // const typeOptions = await getTeaTypeOptions();
+    res.render("index", { title: "Tea Inventory", teaList: teaList, countryOptions: countryOptions, selectedCountryId: selectedCountry });
+  } 
+  catch (err){
+    res.status(500).send("Server error");
+  }
+  
+
+ 
+
 });
 
 /* 
 Will route anytime we go to /new
 */
 indexRouter.get("/new", (req, res) => {
-  res.render("form", { title: "Form" });
+  res.render("newTea", { title: "Create New Tea" });
 });
-// deals with form submission
-indexRouter.post("/new", (req, res) => {
-  // console.log(req.body);
-  messages.push({ text: req.body.messageText, user: req.body.userName, added: new Date() });
+
+// deals with form submission - i.e. when we get a post request from new, we insert into db and redirect
+indexRouter.post("/new", async (req, res) => {
+  await insertTea(req.body); // the body holds info about the tea, accessed via - MUST USE 'await' KEYWORD!
   res.redirect("/");
 });
 

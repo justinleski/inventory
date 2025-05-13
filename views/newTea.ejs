@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>New Item</title>
+    </head>
+
+  <body>
+    <div>
+        <h2>Create a new item:</h2>
+
+        <form method="post" action="/new" style="display: flex; flex-direction: column; ">
+
+            <label for="tea_name">Tea Name:</label>
+            <input type="text" id="tea_name" name="tea_name" required />
+
+            <label for="decaf">Decaf:</label>
+            <select id="decaf" name="decaf">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" min="0" required />
+
+            <label for="type_id">Tea Type:</label>
+            <select id="type_id" name="type_id" required>
+                <!-- These should be populated dynamically from your database -->
+                <option value="1">Green</option>
+                <option value="2">Black</option>
+                <option value="3">Oolong</option>
+            </select>
+
+            <label for="country_id">Country of Origin:</label>
+            <select id="country_id" name="country_id" required>
+                <!-- These should also be populated dynamically -->
+                <option value="1">Japan</option>
+                <option value="2">India</option>
+                <option value="3">China</option>
+            </select>
+
+            <button type="submit">Add Tea</button>
+
+        </form>
+
+    </div>
+
+    
+  
+  </body>
+</html>
