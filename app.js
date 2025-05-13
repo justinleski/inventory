@@ -2,7 +2,9 @@ const express = require("express");
 const path = require("node:path");
 const app = express();
 const indexRouter = require("./routes/indexRouter");
+
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("styles"));
 
 
 app.set("views", path.join(__dirname, "views"));

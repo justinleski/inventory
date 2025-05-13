@@ -1,12 +1,13 @@
 <html>
     <head>
         <title>Tea Inventory</title>
+        <link rel="stylesheet" href="/styles.css">
     </head>
 
   <body>
     <div style="display: flex; flex-direction: column; ">
 
-        <h1>Tea Inventory</h1>
+        <h1 class="red">Tea Inventory</h1>
 
         <label for="country">Choose a country to filter by:</label>
 
@@ -15,9 +16,9 @@
             <select name="country" id="country" onchange="this.form.submit()">
                 <option value="">-- All Countries --</option>
                 <% countryOptions.forEach(country => { %>
-                <option value="<%= country.id %>" <%= country.id == selectedCountryId ? 'selected' : '' %>>
-                    <%= country.country_name %>
-                </option>
+                    <option value="<%= country.id %>" <%= country.id == selectedCountryId ? 'selected' : '' %>>
+                        <%= country.country_name %>
+                    </option>
                 <% }); %>
             </select>
         </form>
@@ -27,7 +28,7 @@
         <a href="/new">Add new Tea</a>
 
         <% teaList.map((tea) => { %>
-            <div style="display: flex; flex-direction: column; background-color: rgb(193, 195, 197); border-radius: 1.5em; padding: 1em; gap: 8px; margin: 16px;">
+            <div style="display: flex; flex-direction: column; background-color: rgb(187, 234, 197); border-radius: 1.5em; padding: 1em; gap: 8px; margin: 16px;">
                 <h2><%=tea.tea_name%></h2>
                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
                     <h3 style="color: rgb(135, 135, 137);"><%=tea.stock%></h3>

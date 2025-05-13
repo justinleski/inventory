@@ -37,8 +37,20 @@ indexRouter.get("/", async (req, res) => { // anonymous funtion, still needs to 
 /* 
 Will route anytime we go to /new
 */
-indexRouter.get("/new", (req, res) => {
-  res.render("newTea", { title: "Create New Tea" });
+indexRouter.get("/new", async (req, res) => {
+
+  try{
+
+    const countryOptions = await getCountryOptions();
+    const teaTypeOptions = await getTeaTypeOptions();
+    res.render("newTea", { title: "Create New Tea", countryOptions: countryOptions, teaTypeOptions: teaTypeOptions });
+    
+  } catch(err){
+    res.status(500).send("Server error");
+  }
+
+
+  
 });
 
 // deals with form submission - i.e. when we get a post request from new, we insert into db and redirect

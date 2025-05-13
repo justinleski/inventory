@@ -24,17 +24,21 @@
             <label for="type_id">Tea Type:</label>
             <select id="type_id" name="type_id" required>
                 <!-- These should be populated dynamically from your database -->
-                <option value="1">Green</option>
-                <option value="2">Black</option>
-                <option value="3">Oolong</option>
+                <% teaTypeOptions.forEach(tea => { %>
+                    <option value="<%= tea.id %>" >
+                        <%= tea.name %>
+                    </option>
+                <% }); %>
             </select>
 
             <label for="country_id">Country of Origin:</label>
             <select id="country_id" name="country_id" required>
                 <!-- These should also be populated dynamically -->
-                <option value="1">Japan</option>
-                <option value="2">India</option>
-                <option value="3">China</option>
+                <% countryOptions.forEach(country => { %>
+                    <option value="<%= country.id %>">
+                        <%= country.country_name %>
+                    </option>
+                <% }); %>
             </select>
 
             <button type="submit">Add Tea</button>
