@@ -1,11 +1,8 @@
 const { Pool } = require("pg");
 
-// All of the following properties should be read from environment variables
-// We're hardcoding them here for simplicity
-module.exports = new Pool({
-  host: "localhost", // or wherever the db is hosted
-  user: "justinleski",
-  database: "tea_inv",
-  password: "1217",
-  port: 5432 // The default port
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
 });
+
+module.exports = pool;
