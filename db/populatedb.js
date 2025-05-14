@@ -59,7 +59,7 @@ INSERT INTO tea_name (tea_name, decaf, stock, type_id, country_id) VALUES
 async function main() {
     console.log("seeding...");
     const client = new Client({
-      connectionString: "postgresql://justinleski:1217@localhost:5432/tea_inv",
+      connectionString: process.env.DATABASE_URL,
     });
     await client.connect();
     await client.query(SQL);
